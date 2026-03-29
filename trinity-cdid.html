@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trinity CDID - Joki CDID Bonus Melimpah</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Exo+2:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f5c842;
+    --gold-light: #ffe680;
+    --gold-dark: #c9960a;
+    --blue-deep: #05082e;
+    --blue-mid: #0a1060;
+    --blue-accent: #1a3aff;
+    --cyan: #00d4ff;
+    --white: #ffffff;
+    --card-bg: rgba(10, 20, 80, 0.75);
+    --card-border: rgba(80, 120, 255, 0.35);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--blue-deep);
+    color: var(--white);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  .bg-layer {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, #0d1a7a 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, #0a2060 0%, transparent 60%),
+      linear-gradient(180deg, #050a30 0%, #020518 100%);
+  }
+  .grid-overlay {
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(40,80,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(40,80,255,0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift { 0% { background-position: 0 0; } 100% { background-position: 48px 48px; } }
+  .particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .particle {
+    position: absolute; border-radius: 50%; background: var(--gold); opacity: 0;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { opacity: 0; transform: translateY(0) scale(0); }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.2; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(1.5); }
+  }
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto; padding: 0 16px 60px;
+  }
+  header {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 0 20px; position: relative; min-height: 150px;
+  }
+  .car-left, .car-right {
+    position: absolute; top: 20px; width: 200px;
+    filter: drop-shadow(0 0 14px rgba(30,80,255,0.5));
+  }
+  .car-left { left: -20px; animation: carFloat 4s ease-in-out infinite; }
+  .car-right { right: -20px; transform: scaleX(-1); animation: carFloatR 4s ease-in-out infinite 1.5s; }
+  @keyframes carFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes carFloatR {
+    0%,100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-8px); }
+  }
+  .logo-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: fadeDown 0.7s ease both;
+  }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+  .logo-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    border: 2.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: var(--gold);
+    background: rgba(10,18,70,0.9);
+    box-shadow: 0 0 24px rgba(245,200,66,0.4), 0 0 60px rgba(245,200,66,0.15);
+  }
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+    letter-spacing: 9px; color: var(--gold);
+    text-shadow: 0 0 20px rgba(245,200,66,0.6);
+  }
+  .ticker-wrap {
+    overflow: hidden;
+    background: rgba(245,200,66,0.08);
+    border-top: 1px solid rgba(245,200,66,0.25);
+    border-bottom: 1px solid rgba(245,200,66,0.25);
+    padding: 8px 0; margin: 8px 0 0;
+  }
+  .ticker {
+    display: flex; white-space: nowrap;
+    animation: ticker 18s linear infinite;
+    font-family: 'Rajdhani', sans-serif; font-size: 14px;
+    font-weight: 600; color: var(--gold); letter-spacing: 1px;
+  }
+  .ticker span { padding: 0 36px; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .hero { text-align: center; padding: 24px 0 8px; position: relative; animation: fadeUp 0.8s 0.2s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 13vw, 100px);
+    line-height: 0.9; color: var(--gold);
+    text-shadow: 0 0 12px rgba(245,200,66,0.8), 0 0 40px rgba(245,200,66,0.35), 0 4px 0 rgba(0,0,0,0.6);
+    letter-spacing: 2px;
+  }
+  .hero h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(26px, 5.5vw, 50px);
+    color: var(--white); letter-spacing: 6px;
+    text-shadow: 0 0 20px rgba(80,140,255,0.6); margin-top: 6px;
+  }
+  .hero-row { position: relative; display: inline-block; width: 100%; }
+  .mascot {
+    position: absolute; right: 0; bottom: -10px; width: 120px;
+    filter: drop-shadow(0 0 14px rgba(30,80,255,0.5));
+    animation: mascotBob 3s ease-in-out infinite;
+  }
+  @keyframes mascotBob { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+  .coin { position: absolute; font-size: 36px; animation: coinBob 3s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(245,200,66,0.7)); user-select: none; }
+  @keyframes coinBob { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(10deg); } }
+  .c1 { left: 2%; top: 0; }
+  .c2 { left: 6%; bottom: 0; font-size: 24px; animation-delay: 0.8s; }
+  .c3 { right: 14%; top: -10px; font-size: 44px; animation-delay: 1.2s; }
+  .price-section { margin: 28px 0 10px; animation: fadeUp 0.9s 0.4s ease both; }
+  .price-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .price-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 13px; padding: 16px 12px 14px;
+    text-align: center; position: relative; overflow: hidden;
+    cursor: pointer; backdrop-filter: blur(8px);
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .price-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,220,60,0.06) 0%, transparent 60%);
+  }
+  .price-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4; transition: opacity 0.3s;
+  }
+  .price-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(245,200,66,0.25), 0 0 0 1.5px rgba(245,200,66,0.5);
+    border-color: var(--gold-dark);
+  }
+  .price-card:hover::after { opacity: 1; }
+  .card-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 3.5vw, 30px);
+    color: var(--gold);
+    text-shadow: 0 0 10px rgba(245,200,66,0.5); line-height: 1;
+  }
+  .card-bonus {
+    font-family: 'Rajdhani', sans-serif; font-size: 11px;
+    font-weight: 700; color: var(--cyan); letter-spacing: 1.5px;
+  }
+  .card-price {
+    font-family: 'Exo 2', sans-serif;
+    font-size: clamp(13px, 2vw, 17px);
+    font-weight: 700; color: var(--white);
+    margin-top: 5px;
+  }
+  .cta-wrap { text-align: center; margin: 28px 0 14px; animation: fadeUp 1s 0.6s ease both; }
+  .cta-btn {
+    display: inline-block; padding: 15px 50px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 24px;
+    letter-spacing: 3px; color: var(--blue-deep);
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    border-radius: 50px; text-decoration: none;
+    box-shadow: 0 6px 32px rgba(245,200,66,0.45), 0 2px 0 rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+    border: none; cursor: pointer;
+  }
+  .cta-btn::before {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    animation: shimmer 2.5s infinite;
+  }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .cta-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 40px rgba(245,200,66,0.65); }
+  .socials {
+    display: flex; justify-content: center; align-items: center;
+    gap: 20px; padding: 22px 0 10px;
+    border-top: 1px solid rgba(60,100,255,0.2);
+    flex-wrap: wrap; animation: fadeUp 1s 0.8s ease both;
+  }
+  .social-link {
+    display: flex; align-items: center; gap: 9px;
+    text-decoration: none; color: var(--white);
+    font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 1px;
+    padding: 9px 20px; border-radius: 28px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    background: rgba(10,20,80,0.5); backdrop-filter: blur(6px);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .social-link:hover { transform: translateY(-3px); }
+  .ig:hover { border-color: #ff6699; box-shadow: 0 6px 20px rgba(255,100,150,0.3); }
+  .tt:hover { border-color: #00e5ff; box-shadow: 0 6px 20px rgba(0,220,255,0.3); }
+  .qris-badge {
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px;
+    color: var(--gold); border: 2px solid var(--gold);
+    padding: 5px 16px; border-radius: 6px; background: rgba(0,0,0,0.3);
+  }
+  .price-card .check-mark {
+    display: none;
+    position: absolute;
+    top: 8px; right: 10px;
+    width: 22px; height: 22px;
+    background: var(--gold);
+    color: #05082e;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 22px;
+    text-align: center;
+  }
+  .price-card.selected {
+    border-color: var(--gold) !important;
+    background: rgba(245,200,66,0.15) !important;
+    box-shadow: 0 0 28px rgba(245,200,66,0.5), 0 0 0 2.5px var(--gold) !important;
+    transform: scale(1.06) !important;
+    z-index: 2;
+  }
+  .price-card.selected .check-mark { display: block; }
+  .cta-btn.not-ready { opacity: 0.75; filter: grayscale(0.3); }
+  .cta-btn.ready {
+    background: linear-gradient(135deg, #0dc956, #25D366, #128C7E) !important;
+    color: #fff !important;
+    animation: pulse-wa 2s ease-in-out infinite;
+    box-shadow: 0 4px 30px rgba(37,211,102,0.55) !important;
+    filter: none !important; opacity: 1 !important;
+  }
+  @keyframes pulse-wa {
+    0%,100% { box-shadow: 0 4px 30px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0.3); }
+    50%      { box-shadow: 0 4px 40px rgba(37,211,102,0.7), 0 0 0 10px rgba(37,211,102,0); }
+  }
+  @media (max-width: 580px) {
+    .car-left, .car-right { width: 110px; }
+    .car-left { left: -8px; } .car-right { right: -8px; }
+    .price-grid { gap: 7px; }
+    .price-card { padding: 10px 6px; }
+    .mascot { width: 80px; right: -8px; }
+    .social-link { font-size: 13px; padding: 8px 14px; }
+  }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-6px)}
+    40%{transform:translateX(6px)}
+    60%{transform:translateX(-4px)}
+    80%{transform:translateX(4px)}
+  }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="grid-overlay"></div>
+<div class="particles" id="particles"></div>
+
+<div class="wrapper">
+  <header>
+    <div class="car-left">
+      <svg viewBox="0 0 230 110" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <ellipse cx="58" cy="96" rx="20" ry="20" fill="#111" stroke="#555" stroke-width="2.5"/>
+        <ellipse cx="58" cy="96" rx="11" ry="11" fill="#333"/>
+        <ellipse cx="172" cy="96" rx="20" ry="20" fill="#111" stroke="#555" stroke-width="2.5"/>
+        <ellipse cx="172" cy="96" rx="11" ry="11" fill="#333"/>
+        <rect x="18" y="56" width="194" height="42" rx="10" fill="#c0d4ee"/>
+        <path d="M38 56 Q58 22 115 18 Q162 15 195 56Z" fill="#d8eaff"/>
+        <rect x="46" y="26" width="48" height="28" rx="4" fill="#90b8ee" opacity="0.85"/>
+        <rect x="104" y="24" width="56" height="30" rx="4" fill="#90b8ee" opacity="0.85"/>
+        <rect x="18" y="65" width="194" height="5" fill="#aac4de"/>
+        <rect x="18" y="58" width="32" height="16" rx="4" fill="#ffee80" opacity="0.9"/>
+        <rect x="182" y="58" width="28" height="10" rx="3" fill="#ff4444" opacity="0.75"/>
+        <rect x="18" y="70" width="194" height="3" rx="1" fill="rgba(255,255,255,0.3)"/>
+      </svg>
+    </div>
+
+    <div class="car-right">
+      <svg viewBox="0 0 240 115" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <ellipse cx="55" cy="98" rx="20" ry="20" fill="#111" stroke="#555" stroke-width="2.5"/>
+        <ellipse cx="55" cy="98" rx="11" ry="11" fill="#333"/>
+        <ellipse cx="185" cy="98" rx="20" ry="20" fill="#111" stroke="#555" stroke-width="2.5"/>
+        <ellipse cx="185" cy="98" rx="11" ry="11" fill="#333"/>
+        <rect x="14" y="52" width="212" height="50" rx="12" fill="#d0e4f8"/>
+        <path d="M32 52 Q52 16 118 12 Q180 10 208 52Z" fill="#e4f0ff"/>
+        <rect x="48" y="20" width="58" height="30" rx="4" fill="#8aaedd" opacity="0.85"/>
+        <rect x="116" y="18" width="64" height="32" rx="4" fill="#8aaedd" opacity="0.85"/>
+        <rect x="14" y="62" width="212" height="7" fill="#a8c2dc"/>
+        <rect x="14" y="54" width="36" height="18" rx="4" fill="#ffe080" opacity="0.9"/>
+        <rect x="192" y="54" width="30" height="12" rx="3" fill="#ff4444" opacity="0.75"/>
+        <rect x="14" y="73" width="212" height="3" rx="1" fill="rgba(255,255,255,0.35)"/>
+        <rect x="14" y="77" width="212" height="2" rx="1" fill="rgba(255,255,255,0.15)"/>
+      </svg>
+    </div>
+
+    <div class="logo-wrap">
+      <div class="logo-icon">T</div>
+      <div class="logo-text">TRINITY</div>
+    </div>
+  </header>
+
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>⭐ JOKI CDID TERPERCAYA ⭐</span>
+      <span>🏆 BONUS MELIMPAH SETIAP PAKET 🏆</span>
+      <span>🚀 PROSES CEPAT &amp; AMAN 🚀</span>
+      <span>💰 HARGA TERJANGKAU 💰</span>
+      <span>⭐ JOKI CDID TERPERCAYA ⭐</span>
+      <span>🏆 BONUS MELIMPAH SETIAP PAKET 🏆</span>
+      <span>🚀 PROSES CEPAT &amp; AMAN 🚀</span>
+      <span>💰 HARGA TERJANGKAU 💰</span>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-row">
+      <div class="coin c1">🪙</div>
+      <div class="coin c2">💰</div>
+      <div class="coin c3">🪙</div>
+      <h1>PRICELIST<br>JOKI CDID</h1>
+      <h2>✦ BONUS MELIMPAH ✦</h2>
+      <div class="mascot">
+        <svg viewBox="0 0 110 170" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <rect x="25" y="8" width="60" height="52" rx="8" fill="#FDDBB4"/>
+          <rect x="23" y="6" width="64" height="20" rx="6" fill="#7B4F2E"/>
+          <rect x="35" y="26" width="14" height="12" rx="3" fill="white"/>
+          <rect x="61" y="26" width="14" height="12" rx="3" fill="white"/>
+          <rect x="39" y="29" width="7" height="7" rx="2" fill="#222"/>
+          <rect x="65" y="29" width="7" height="7" rx="2" fill="#222"/>
+          <path d="M40 48 Q55 60 70 48" stroke="#c0805a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M24 23 Q18 35 22 48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/>
+          <rect x="14" y="44" width="12" height="10" rx="4" fill="#2255ff"/>
+          <circle cx="14" cy="49" r="4" fill="#00ccff"/>
+          <rect x="18" y="64" width="74" height="70" rx="8" fill="#1a5fc8"/>
+          <rect x="44" y="64" width="22" height="70" fill="#1040a0"/>
+          <path d="M44 64 L55 80 L66 64Z" fill="white" opacity="0.75"/>
+          <rect x="24" y="76" width="16" height="12" rx="3" fill="#f5c842"/>
+          <rect x="26" y="78" width="12" height="3" rx="1" fill="#7B4F2E"/>
+          <rect x="26" y="83" width="8" height="2.5" rx="1" fill="#7B4F2E"/>
+          <rect x="68" y="72" width="34" height="40" rx="4" fill="#f0ead6" transform="rotate(5,68,72)"/>
+          <rect x="74" y="67" width="22" height="8" rx="3" fill="#8B5E3C" transform="rotate(5,74,67)"/>
+          <line x1="73" y1="85" x2="94" y2="82" stroke="#bbb" stroke-width="2"/>
+          <line x1="73" y1="92" x2="94" y2="89" stroke="#bbb" stroke-width="2"/>
+          <line x1="73" y1="99" x2="90" y2="96" stroke="#bbb" stroke-width="2"/>
+          <rect x="6" y="86" width="17" height="38" rx="7" fill="#FDDBB4" transform="rotate(-15,6,86)"/>
+          <rect x="2" y="116" width="19" height="12" rx="6" fill="#FDDBB4" transform="rotate(-15,2,116)"/>
+          <rect x="27" y="132" width="22" height="36" rx="7" fill="#0f3a8c"/>
+          <rect x="61" y="132" width="22" height="36" rx="7" fill="#0f3a8c"/>
+          <rect x="22" y="162" width="28" height="12" rx="5" fill="#111"/>
+          <rect x="56" y="162" width="28" height="12" rx="5" fill="#111"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="price-section">
+    <div class="price-grid">
+      <div class="price-card" data-paket="15M" data-harga="IDR 20,000">
+        <div class="card-amount">15M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 20,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="20M" data-harga="IDR 25,000">
+        <div class="card-amount">20M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 25,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="30M" data-harga="IDR 40,000">
+        <div class="card-amount">30M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 40,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="50M" data-harga="IDR 50,000">
+        <div class="card-amount">50M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 50,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="80M" data-harga="IDR 80,000">
+        <div class="card-amount">80M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 80,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="100M" data-harga="IDR 100,000">
+        <div class="card-amount">100M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 100,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="150M" data-harga="IDR 150,000">
+        <div class="card-amount">150M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 150,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="200M" data-harga="IDR 200,000">
+        <div class="card-amount">200M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 200,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+      <div class="price-card" data-paket="300M" data-harga="IDR 300,000">
+        <div class="card-amount">300M <span class="card-bonus">+BONUS</span></div>
+        <div class="card-price">IDR 300,000</div>
+        <div class="check-mark">✓</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="selected-info" style="display:none; text-align:center; margin:12px 0 0;">
+    <p style="font-family:'Exo 2',sans-serif; font-size:13px; color:#aac0ff; letter-spacing:1px;">
+      Paket dipilih: <strong id="selected-label" style="color:#f5c842; font-size:15px;"></strong>
+    </p>
+  </div>
+
+  <div class="cta-wrap">
+    <button id="cta-btn" class="cta-btn not-ready" onclick="orderWA()">👆 PILIH PAKET DULU</button>
+  </div>
+
+  <div class="socials">
+    <a href="https://www.instagram.com/trinity.cdid" target="_blank" class="social-link ig">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="2" width="20" height="20" rx="6" stroke="url(#ig1)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4.5" stroke="url(#ig1)" stroke-width="2"/>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="#ff6699"/>
+        <defs>
+          <linearGradient id="ig1" x1="2" y1="2" x2="22" y2="22">
+            <stop stop-color="#f09433"/>
+            <stop offset="0.5" stop-color="#dc2743"/>
+            <stop offset="1" stop-color="#bc1888"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      trinity.cdid
+    </a>
+    <div class="qris-badge">QRIS</div>
+    <a href="https://www.tiktok.com/@trinity.cdid" target="_blank" class="social-link tt">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="2" width="20" height="20" rx="5" fill="#010101"/>
+        <path d="M14.5 6.5C14.5 8.2 15.8 9.5 17.5 9.5V11.5C16.4 11.5 15.4 11.1 14.5 10.5V14.5C14.5 16.7 12.7 18.5 10.5 18.5C8.3 18.5 6.5 16.7 6.5 14.5C6.5 12.3 8.3 10.5 10.5 10.5C10.7 10.5 10.9 10.5 11.1 10.6V12.6C10.9 12.5 10.7 12.5 10.5 12.5C9.4 12.5 8.5 13.4 8.5 14.5C8.5 15.6 9.4 16.5 10.5 16.5C11.6 16.5 12.5 15.6 12.5 14.5V6.5H14.5Z" fill="white"/>
+        <path d="M14.5 6.5C14.5 8.2 15.8 9.5 17.5 9.5V11.5C16.4 11.5 15.4 11.1 14.5 10.5" stroke="#ff004f" stroke-width="0.5"/>
+        <path d="M10.5 12.5C10.7 12.5 10.9 12.5 11.1 12.6V10.6C10.9 10.5 10.7 10.5 10.5 10.5C8.3 10.5 6.5 12.3 6.5 14.5C6.5 16.7 8.3 18.5 10.5 18.5" stroke="#00e5ff" stroke-width="0.5"/>
+      </svg>
+      trinity.cdid
+    </a>
+  </div>
+</div>
+
+<script>
+  // Partikel Latar Belakang
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 5 + 2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      bottom:${Math.random()*20}%;
+      animation-duration:${Math.random()*10+6}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    container.appendChild(p);
+  }
+
+  // LOGIKA PEMILIHAN PAKET & WHATSAPP
+  let selectedPaket = null;
+  const WA_NUMBER = '6287825921558';
+  const btn = document.getElementById('cta-btn');
+  const info = document.getElementById('selected-info');
+  const label = document.getElementById('selected-label');
+
+  document.querySelectorAll('.price-card').forEach(card => {
+    card.addEventListener('click', () => {
+      // CEK APAKAH YANG DIKLIK ADALAH PAKET YANG SUDAH TERPILIH
+      if (card.classList.contains('selected')) {
+        // JIKA IYA -> BATALKAN PILIHAN (CANCEL)
+        card.classList.remove('selected');
+        selectedPaket = null;
+        
+        // Sembunyikan info dan kembalikan tombol ke awal
+        info.style.display = 'none';
+        btn.innerHTML = '👆 PILIH PAKET DULU';
+        btn.classList.add('not-ready');
+        btn.classList.remove('ready');
+      } else {
+        // JIKA TIDAK -> PILIH PAKET INI
+        document.querySelectorAll('.price-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedPaket = card.getAttribute('data-paket');
+        const harga = card.getAttribute('data-harga');
+
+        // Update info & tombol
+        label.textContent = selectedPaket + ' — ' + harga;
+        info.style.display = 'block';
+        btn.innerHTML = '💬 ORDER SEKARANG — ' + selectedPaket;
+        btn.classList.remove('not-ready');
+        btn.classList.add('ready');
+
+        // Scroll ke tombol otomatis
+        setTimeout(() => {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 200);
+      }
+    });
+  });
+
+  function orderWA() {
+    if (!selectedPaket) {
+      // Efek getar jika belum pilih paket
+      const grid = document.querySelector('.price-grid');
+      grid.style.animation = 'shake 0.4s ease';
+      setTimeout(() => grid.style.animation = '', 450);
+      return;
+    }
+    
+    // Format Pesan Baru
+    const teksPesan = "Halo min, saya ingin joki " + selectedPaket + ", apakah masih ada slot?";
+    const pesanEncoded = encodeURIComponent(teksPesan);
+    
+    const url = 'https://wa.me/' + WA_NUMBER + '?text=' + pesanEncoded;
+    window.open(url, '_blank');
+  }
+</script>
+</body>
+</html>
